@@ -3,38 +3,49 @@ package com.beanvalidation.data;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class Customer {
+    /*
+     * Using Built in validations in javax.validation.constraints via annotations @NotNull and @Size
+     */
     @NotNull
     @Size(max = 40 , min = 3)
     private String firstName;
+
+    @NotNull
     private String lastName;
+
+    @NotNull
     private String email;
+
+    @NotNull
     private String phoneNumber;
+
+    /*
+     * Element must be a date in past
+     */
     @Past
-    private Date dateOfBirth;
+    private Date dateOfCustomerEnrollment;
+
+    public Date getDateOfCustomerEnrollment() {
+        return dateOfCustomerEnrollment;
+    }
+
+    public void setDateOfCustomerEnrollment(Date dateOfCustomerEnrollment) {
+        this.dateOfCustomerEnrollment = dateOfCustomerEnrollment;
+    }
 
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String email, String phoneNumber, String dateOfBirth) {
+    public Customer(String firstName, String lastName, String email, String phoneNumber, Date dateOfCustomerEnrollment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.dateOfBirth = convert(dateOfBirth);
-    }
-
-    private Date convert(String dateOfBirth) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-        try {
-            return dateFormat.parse(dateOfBirth);
-        } catch (ParseException e) {
-            return null;
-        }
+        this.dateOfCustomerEnrollment = dateOfCustomerEnrollment;
     }
 
     public String getFirstName() {
@@ -69,14 +80,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     @Override
     public String toString() {
         return "Customer{" +
@@ -84,7 +87,7 @@ public class Customer {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfCustomerEnrollment='" + dateOfCustomerEnrollment + '\'' +
                 '}';
     }
 }
