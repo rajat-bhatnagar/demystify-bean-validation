@@ -1,5 +1,6 @@
 package com.beanvalidation.data;
 
+import com.beanvalidation.constraints.composition.Email;
 import com.beanvalidation.constraints.composition.NotEmpty;
 
 /**
@@ -17,6 +18,7 @@ public class Salesman {
     @NotEmpty
     private String lastname;
 
+    @Email
     private String email;
 
     private String salesMailboxEmail;

@@ -31,7 +31,7 @@ class SalesmanServiceSpec extends Specification{
 
     def "test - createSalesman - valid"(){
         given:
-        Salesman salesman = new Salesman('Fand', 'Yuang', 'ming@kungfu.com' ,'mingmascot@dalai.com')
+        Salesman salesman = new Salesman('Fand', 'Yuang', 'ming.king@kungfu.com' ,'mingmascot@dalai.com')
 
         when:
         boolean isSalesmanCreated = bl.createSalesman(salesman)
@@ -60,6 +60,34 @@ class SalesmanServiceSpec extends Specification{
     def "test - createSalesman - last name less than 4 characters"(){
         given:
         Salesman salesman = new Salesman('Danze', 'Pu', 'Pu@kungfu.com' ,'Pu@dalai.com')
+
+        when:
+        boolean isSalesmanCreated = bl.createSalesman(salesman)
+
+        then:
+        0 * _
+
+        and:
+        !isSalesmanCreated
+    }
+
+    def "test - createSalesman - invalid email no @"(){
+        given:
+        Salesman salesman = new Salesman('Fand', 'Yuang', 'zoo' ,'mingmascot@dalai.com')
+
+        when:
+        boolean isSalesmanCreated = bl.createSalesman(salesman)
+
+        then:
+        0 * _
+
+        and:
+        !isSalesmanCreated
+    }
+
+    def "test - createSalesman - invalid email"(){
+        given:
+        Salesman salesman = new Salesman('Fand', 'Yuang', 'zinga@z.' ,'mingmascot@dalai.com')
 
         when:
         boolean isSalesmanCreated = bl.createSalesman(salesman)
