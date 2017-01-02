@@ -98,4 +98,18 @@ class SalesmanServiceSpec extends Specification{
         and:
         !isSalesmanCreated
     }
+
+    def "test - createSalesman - null e mail - single error message"(){
+        given:
+        Salesman salesman = new Salesman('Tunga', 'Zing', null ,'zing@dalai.com')
+
+        when:
+        boolean isSalesmanCreated = bl.createSalesman(salesman)
+
+        then:
+        0 * _
+
+        and:
+        !isSalesmanCreated
+    }
 }
