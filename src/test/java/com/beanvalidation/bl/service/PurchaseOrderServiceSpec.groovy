@@ -31,7 +31,7 @@ class PurchaseOrderServiceSpec extends Specification{
     def "test - createCustomer - valid"(){
         given:
         String dateOfCustomerEnrollment = '01-01-1982'
-        Customer customer = new Customer('Tom' , 'Saw', 'Tome@Rockstar.com', '897-897-8967', Date.parse('dd-MM-yyyy', dateOfCustomerEnrollment))
+        Customer customer = new Customer('Tom' , 'Sawyer', 'Tome@Rockstar.com', '897-897-8967', Date.parse('dd-MM-yyyy', dateOfCustomerEnrollment))
 
         when:
         boolean isCustomerCreated = bl.createCustomer(customer)
@@ -70,5 +70,20 @@ class PurchaseOrderServiceSpec extends Specification{
 
         and:
         !isCustomerCreatedInFutureDate
+    }
+
+    def "test - createCustomer - last name custom error message when length is less than 4 characters"(){
+        given:
+        String dateOfCustomerEnrollment = '01-01-1982'
+        Customer customer = new Customer('Tom' , 'Saw', 'Tome@Rockstar.com', '897-897-8967', Date.parse('dd-MM-yyyy', dateOfCustomerEnrollment))
+
+        when:
+        boolean isCustomerCreated = bl.createCustomer(customer)
+
+        then:
+        0 * _
+
+        and:
+        !isCustomerCreated
     }
 }

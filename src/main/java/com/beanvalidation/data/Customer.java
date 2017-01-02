@@ -15,6 +15,10 @@ public class Customer {
     private String firstName;
 
     @NotNull
+    /**
+     * Customizing the message using a template
+     */
+    @Size(min = 4 , message = "lastName cannot be less than four characters")
     private String lastName;
 
     @NotNull
